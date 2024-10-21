@@ -1,0 +1,8 @@
+# Built files
+/target
+/.history/
+/.idea/
+/.vscode/
+/.cargo/
+
+Cargo.lock
