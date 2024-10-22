@@ -25,8 +25,8 @@ where
     }
 }
 
-/// Implementation of `ToHexExt` for fixed-size byte arrays `[u8; 16]`.
-impl ToHexExt for [u8; 16] {
+/// Implementation of `ToHexExt` for fixed-size byte arrays.
+impl<const N: usize> ToHexExt for [u8; N] {
     fn to_hex(&self, uppercase: bool) -> String {
         common::bytes_to_hex(self, uppercase)
     }
