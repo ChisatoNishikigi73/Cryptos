@@ -1,6 +1,6 @@
 [package]
 name = "cryptos"
-version = "0.0.1-alpha.1"
+version = "0.0.1-alpha.2"
 edition = "2021"
 authors = ["ChisatoNishikigi73 <ChisatoNishikigi73@gmail.com>"]
 description = "All cryptographic in one, make crypto easy"
