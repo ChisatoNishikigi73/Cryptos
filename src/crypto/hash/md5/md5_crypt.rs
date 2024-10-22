@@ -9,8 +9,8 @@ pub use crate::utils::r#trait::base_trait::ToHexExt;
 ///
 /// # Arguments
 ///
-/// * `password` - A string slice that holds the password to be hashed
-/// * `salt` - A string slice that holds the salt to be used in the hashing process
+/// * `password` - A byte slice that holds the password to be hashed
+/// * `salt` - A byte slice that holds the salt to be used in the hashing process
 /// * `pattern` - A string slice that specifies the pattern of MD5 operations to be performed
 ///
 /// # Returns
@@ -20,10 +20,10 @@ pub use crate::utils::r#trait::base_trait::ToHexExt;
 /// # Examples
 ///
 /// ```
-/// let result = md5_crypt("password", "salt", "md5($salt.$pass)");
+/// let result = md5_crypt(b"password", b"salt", "md5($salt.$pass)");
 /// assert_eq!(result.to_hex(false), "67a1e09bb1f83f5007dc119c14d663aa");
 /// ```
-pub fn md5_crypt(password: &str, salt: &str, pattern: &str) -> [u8; 16] {
+pub fn md5_crypt(password: &[u8], salt: &[u8], pattern: &str) -> [u8; 16] {
     let result = process_pattern(pattern, password, salt);
     result.try_into().expect("Failed to convert result to [u8; 16]")
 }
@@ -42,7 +42,7 @@ pub fn md5_crypt(password: &str, salt: &str, pattern: &str) -> [u8; 16] {
 /// # Returns
 ///
 /// A `Vec<u8>` containing the result of processing the pattern
-fn process_pattern(pattern: &str, password: &str, salt: &str) -> Vec<u8> {
+fn process_pattern(pattern: &str, password: &[u8], salt: &[u8]) -> Vec<u8> {
     if pattern.starts_with("md5(") && pattern.ends_with(')') {
         let inner = &pattern[4..pattern.len() - 1];
         let inner_result = process_pattern(inner, password, salt);
@@ -69,10 +69,10 @@ fn process_pattern(pattern: &str, password: &str, salt: &str) -> Vec<u8> {
 /// # Returns
 ///
 /// A `Vec<u8>` containing the result of processing the part
-fn process_part(part: &str, password: &str, salt: &str) -> Vec<u8> {
+fn process_part(part: &str, password: &[u8], salt: &[u8]) -> Vec<u8> {
     match part {
-        "$pass" => password.as_bytes().to_vec(),
-        "$salt" => salt.as_bytes().to_vec(),
+        "$pass" => password.to_vec(),
+        "$salt" => salt.to_vec(),
         _ if part.starts_with("md5(") && part.ends_with(')') => {
             let inner = &part[4..part.len() - 1];
             process_pattern(inner, password, salt)
@@ -126,7 +126,7 @@ mod tests {
         let result = compare_check(
             test_cases,
             "MD5 crypt",
-            |(password, salt, pattern)| md5_crypt(password, salt, pattern).to_hex(false)
+            |(password, salt, pattern)| md5_crypt(password.as_bytes(), salt.as_bytes(), pattern).to_hex(false)
         );
 
         assert!(result, "MD5 crypt Test Failed");
