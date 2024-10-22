@@ -28,7 +28,9 @@ where
         let start = Instant::now();
         let result = func(input);
         let duration = start.elapsed();
-        print!("Test '{:<65}' {}: {:?}", format!("{:?}", input), name, result);
+
+        let truncated_input = truncate_with_ellipsis(format!("{:?}", input), 62);
+        print!("Test '{:<65}' {}: ", truncated_input, name);
 
         if result == *expected {
             println!(" \x1b[32msuccess\x1b[0m in \x1b[35m{:?}\x1b[0m", duration);
@@ -47,4 +49,13 @@ where
     }
 
     all_tests_passed
+}
+
+/// Truncate the string with ellipsis
+fn truncate_with_ellipsis(s: String, max_length: usize) -> String {
+    if s.len() <= max_length {
+        s
+    } else {
+        format!("{}...", &s[..max_length - 3])
+    }
 }
