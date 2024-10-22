@@ -56,6 +56,7 @@ impl MD5State {
 ///
 /// * `input` - A byte slice containing the input data
 /// * `rounds` - The number of rounds to process the input
+///
 /// # Returns
 ///
 /// A 16-byte array containing the MD5 hash
@@ -72,6 +73,7 @@ pub fn md5_base(input: &[u8], rounds: u32) -> [u8; 16] {
 /// # Arguments
 ///
 /// * `input` - A byte slice containing the input data
+///
 /// # Returns
 ///
 /// A 16-byte array containing the MD5 hash
@@ -79,7 +81,7 @@ pub fn process(input: &[u8]) -> [u8; 16] {
     let mut state = MD5State::new();
     let mut buffer = Vec::from(input);
 
-    // 填充消息
+    // Pad the message
     let original_len_in_bits = (buffer.len() * 8) as u64;
     buffer.push(0x80);
     while (buffer.len() % 64) != 56 {
@@ -87,12 +89,12 @@ pub fn process(input: &[u8]) -> [u8; 16] {
     }
     buffer.extend_from_slice(&original_len_in_bits.to_le_bytes());
 
-    // 处理消息块
+    // Process message blocks
     for chunk in buffer.chunks(64) {
         process_chunk(&mut state, chunk);
     }
 
-    // 输出最终结果
+    // Output final result
     unsafe {
         transmute([state.a.to_le(), state.b.to_le(), state.c.to_le(), state.d.to_le()])
     }
@@ -138,27 +140,13 @@ fn process_chunk(state: &mut MD5State, chunk: &[u8]) {
     state.d = state.d.wrapping_add(d);
 }
 
-// /// Converts a 16-byte MD5 digest to a hexadecimal string
-// ///
-// /// # Arguments
-// ///
-// /// * `digest` - The 16-byte MD5 digest
-// /// * `uppercase` - If true, use uppercase letters; otherwise, use lowercase
-// ///
-// /// # Returns
-// ///
-// /// A String containing the hexadecimal representation of the digest
-// pub fn md5_hex(input: &[u8], rounds: u32, uppercase: bool) -> String {
-//     bytes_to_hex(&md5_base(input, rounds), uppercase)
-// }
-
 #[cfg(test)]
 pub mod tests {
+    use super::*;
+    use crate::utils::check::compare_check;
+
     #[test]
     pub fn md5_hex_test() {
-        use super::*;
-        use crate::utils::check::compare_check;
-
         let test_cases = vec![
             ("".to_string(), "d41d8cd98f00b204e9800998ecf8427e".to_string()),
             ("password".to_string(), "5f4dcc3b5aa765d61d8327deb882cf99".to_string()),
