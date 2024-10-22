@@ -1,6 +1,6 @@
 use super::md5_base::md5_base;
-use crate::utils::common::bytes_to_hex;
-
+#[allow(unused_imports)]
+pub use crate::utils::r#trait::base_trait::ToHexExt;
 
 /// Performs MD5 crypt operation based on the given password, salt, and pattern.
 ///
@@ -15,17 +15,17 @@ use crate::utils::common::bytes_to_hex;
 ///
 /// # Returns
 ///
-/// A `String` containing the hexadecimal representation of the final MD5 hash
+/// A `[u8; 16]` containing the final MD5 hash
 ///
 /// # Examples
 ///
 /// ```
-/// let result = md5_crypt("password", "salt", "md5(md5($pass))");
-/// assert_eq!(result, "9bf4b3611c53176f5c649aa4fc1ff6b2");
+/// let result = md5_crypt("password", "salt", "md5($salt.$pass)");
+/// assert_eq!(result.to_hex(false), "67a1e09bb1f83f5007dc119c14d663aa");
 /// ```
-pub fn md5_crypt(password: &str, salt: &str, pattern: &str) -> String {
+pub fn md5_crypt(password: &str, salt: &str, pattern: &str) -> [u8; 16] {
     let result = process_pattern(pattern, password, salt);
-    bytes_to_hex(&result, false)
+    result.try_into().expect("Failed to convert result to [u8; 16]")
 }
 
 /// Processes the given pattern recursively, applying MD5 hash operations as specified.
@@ -126,7 +126,7 @@ mod tests {
         let result = compare_check(
             test_cases,
             "MD5 crypt",
-            |(password, salt, pattern)| md5_crypt(password, salt, pattern)
+            |(password, salt, pattern)| md5_crypt(password, salt, pattern).to_hex(false)
         );
 
         assert!(result, "MD5 crypt Test Failed");

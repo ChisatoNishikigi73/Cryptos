@@ -1,5 +1,7 @@
-use crate::utils::common::bytes_to_hex;
 use std::mem::transmute;
+#[allow(unused_imports)]
+pub use crate::utils::r#trait::base_trait::ToHexExt;
+
 /// Constants used in the MD5 algorithm
 const S: [u32; 64] = [
     7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
@@ -136,19 +138,19 @@ fn process_chunk(state: &mut MD5State, chunk: &[u8]) {
     state.d = state.d.wrapping_add(d);
 }
 
-/// Converts a 16-byte MD5 digest to a hexadecimal string
-///
-/// # Arguments
-///
-/// * `digest` - The 16-byte MD5 digest
-/// * `uppercase` - If true, use uppercase letters; otherwise, use lowercase
-///
-/// # Returns
-///
-/// A String containing the hexadecimal representation of the digest
-pub fn md5_hex(input: &[u8], rounds: u32, uppercase: bool) -> String {
-    bytes_to_hex(&md5_base(input, rounds), uppercase)
-}
+// /// Converts a 16-byte MD5 digest to a hexadecimal string
+// ///
+// /// # Arguments
+// ///
+// /// * `digest` - The 16-byte MD5 digest
+// /// * `uppercase` - If true, use uppercase letters; otherwise, use lowercase
+// ///
+// /// # Returns
+// ///
+// /// A String containing the hexadecimal representation of the digest
+// pub fn md5_hex(input: &[u8], rounds: u32, uppercase: bool) -> String {
+//     bytes_to_hex(&md5_base(input, rounds), uppercase)
+// }
 
 #[cfg(test)]
 pub mod tests {
@@ -166,7 +168,7 @@ pub mod tests {
             ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".to_string(), "d174ab98d277d9f5a5611c2c9f419d9f".to_string()),
         ];
 
-        let result = compare_check(test_cases, "MD5", |input| md5_hex(input.as_bytes(), 1, false));
+        let result = compare_check(test_cases, "MD5", |input| md5_base(input.as_bytes(), 1).to_hex(false));
         assert!(result, "MD5 Test Failed");
     }
 }
