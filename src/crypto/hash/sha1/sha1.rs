@@ -5,7 +5,7 @@ const BLOCK_SIZE: usize = 64; // 512 bits = 64 bytes
 const HASH_SIZE: usize = 20; // 160 bits = 20 bytes
 
 /// Represents the SHA-1 hash algorithm state.
-pub struct Sha1 {
+struct Sha1 {
     state: [u32; 5],
     buffer: [u8; BLOCK_SIZE],
     buffer_len: usize,

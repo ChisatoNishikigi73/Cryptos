@@ -6,7 +6,7 @@ const BLOCK_SIZE: usize = 128; // 1024 bits = 128 bytes
 const HASH_SIZE: usize = 48; // 384 bits = 48 bytes
 
 /// Represents the SHA-384 hash algorithm state.
-pub struct Sha384 {
+struct Sha384 {
     state: [u64; 8],
     buffer: [u8; BLOCK_SIZE],
     buffer_len: usize,

@@ -6,7 +6,7 @@ const BLOCK_SIZE: usize = 128; // 1024 bits = 128 bytes
 const HASH_SIZE: usize = 64; // 512 bits = 64 bytes
 
 /// Represents the SHA-512 hash algorithm state.
-pub struct Sha512 {
+struct Sha512 {
     state: [u64; 8],
     buffer: [u8; BLOCK_SIZE],
     buffer_len: usize,
