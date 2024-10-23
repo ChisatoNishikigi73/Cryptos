@@ -1,7 +1,11 @@
 # Cryptos
 All cryptographic in one, let crypto easy
 
-Now is also in development, but you can use it.
+Now is also in Early development, but you can use it.
+
+## Sth Interesting
+
+- [x] Sudoku decryption
 
 ## HASH
 
