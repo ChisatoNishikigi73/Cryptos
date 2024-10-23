@@ -11,7 +11,7 @@ Now is also in Early development, but you can use it.
 
 - [x] HASH.MD5_base
 - [x] HASH.MD5_crypt
-- [ ] HASH.SHA0
+- [x] HASH.SHA0
 - [x] HASH.SHA1
 - [x] HASH.SHA2
 - [ ] HASH.SHA3
