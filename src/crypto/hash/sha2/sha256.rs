@@ -1,3 +1,8 @@
+//! SHA-256 implementation
+//! 
+//! SHA-256 is a cryptographic hash function that was designed by the National Institute of Standards and Technology (NIST)
+//! It is a 256-bit hash function that is based on the SHA-256 algorithm
+//! 
 use super::sha2_util::{K32, ch32, maj32, bsig0_32, bsig1_32, ssig0_32, ssig1_32};
 #[allow(unused_imports)]
 use crate::utils::r#trait::base_trait::ToHexExt;

@@ -1,3 +1,8 @@
+//! SHA-1 implementation
+//! 
+//! SHA-1 is a cryptographic hash function that was designed by the National Institute of Standards and Technology (NIST)
+//! It is a 160-bit hash function that is based on the SHA-1 algorithm
+//! 
 #[allow(unused_imports)]
 pub use crate::utils::r#trait::base_trait::ToHexExt;
 

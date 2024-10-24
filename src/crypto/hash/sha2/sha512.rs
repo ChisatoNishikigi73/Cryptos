@@ -1,3 +1,8 @@
+//! SHA-512 implementation
+//! 
+//! SHA-512 is a cryptographic hash function that was designed by the National Institute of Standards and Technology (NIST)
+//! It is a 512-bit hash function that is based on the SHA-256 algorithm, but with a different initial values for the state
+//! 
 use super::sha2_util::{K64, ch64, maj64, bsig0_64, bsig1_64, ssig0_64, ssig1_64};
 #[allow(unused_imports)]
 use crate::utils::r#trait::base_trait::ToHexExt;

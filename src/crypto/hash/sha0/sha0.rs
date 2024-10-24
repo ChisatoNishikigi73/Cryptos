@@ -1,3 +1,8 @@
+//! SHA-0 implementation
+//! 
+//! SHA-0 is a cryptographic hash function that was designed by the National Institute of Standards and Technology (NIST)
+//! It is a 160-bit hash function that is based on the SHA-1 algorithm, but with a different initial values for the state
+//! 
 #[allow(unused_imports)]
 pub use crate::utils::r#trait::base_trait::ToHexExt;
 
