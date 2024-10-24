@@ -18,7 +18,7 @@ Now is also in Early development, but you can use it.
 - [x] HASH.SHA0
 - [x] HASH.SHA1
 - [x] HASH.SHA2
-- [ ] HASH.SHA3
+- [x] HASH.SHA3
 - [ ] HASH.RIPEMD
 - [ ] HASH.Whirlpool
 - [ ] HASH.Blake2
