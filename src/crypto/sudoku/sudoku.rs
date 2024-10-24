@@ -1,3 +1,9 @@
+//! Sudoku implementation
+//! 
+//! Sudoku is a logic puzzle that is based on a 9x9 grid, where each cell can contain a number from 1 to 9
+//! The goal is to fill the grid such that each row, column, and 3x3 box contains all the numbers from 1 to 9 exactly once
+//! Background: Sudoku is a popular puzzle that was invented by the Japanese mathematician Takahiro Miyoshi in 1986
+//! 
 use std::fmt;
 
 /// Represents a Sudoku puzzle.
