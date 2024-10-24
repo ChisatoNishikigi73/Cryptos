@@ -7,6 +7,10 @@ Now is also in Early development, but you can use it.
 
 - [x] Sudoku decryption
 
+## Classical
+
+- [x] Caesar Cipher
+
 ## HASH
 
 - [x] HASH.MD5_base
