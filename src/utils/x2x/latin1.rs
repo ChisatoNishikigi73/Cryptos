@@ -7,6 +7,7 @@
 /// # Returns
 ///
 /// Returns the bytes representing the Latin1 string
+#[allow(dead_code)]
 pub fn latin1_to_bytes(s: &str) -> Vec<u8> {
     s.chars().map(|c| c as u8).collect()
 }

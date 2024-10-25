@@ -61,3 +61,14 @@ impl<const N: usize> ToBase64Ext for [u8; N] {
         bytes_to_base64(self)
     }
 }
+
+impl ToBase64Ext for &str {
+    fn to_base64(&self) -> String {
+        self.as_bytes().to_base64()
+    }
+}
+
+#[allow(dead_code)]
+pub fn from_base64(s: &str) -> Vec<u8> {
+    base64_to_bytes(s)
+}

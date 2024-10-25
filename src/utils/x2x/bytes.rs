@@ -70,6 +70,7 @@ pub fn bytes_to_base64(bytes: &[u8]) -> String {
 /// # Returns
 ///
 /// Returns Result with the UTF-8 string or an error if the bytes are not valid UTF-8
+#[allow(dead_code)]
 pub fn bytes_to_utf8(bytes: &[u8]) -> Result<String, std::string::FromUtf8Error> {
     String::from_utf8(bytes.to_vec())
 }
@@ -83,6 +84,7 @@ pub fn bytes_to_utf8(bytes: &[u8]) -> Result<String, std::string::FromUtf8Error>
 /// # Returns
 ///
 /// Returns the Latin1 string
+#[allow(dead_code)]
 pub fn bytes_to_latin1(bytes: &[u8]) -> String {
     bytes.iter().map(|&b| b as char).collect()
 }
@@ -107,8 +109,32 @@ impl ToBytesExt for [u8] {
     }
 }
 
+impl ToBytesExt for &[u8] {
+    fn to_bytes(&self) -> Vec<u8> {
+        (*self).to_vec()
+    }
+}
+
+impl ToBytesExt for Vec<u8> {
+    fn to_bytes(&self) -> Vec<u8> {
+        self.clone()
+    }
+}
+
 impl<const N: usize> ToBytesExt for [u8; N] {
     fn to_bytes(&self) -> Vec<u8> {
         self.to_vec()
+    }
+}
+
+impl ToBytesExt for String {
+    fn to_bytes(&self) -> Vec<u8> {
+        self.as_bytes().to_vec()
+    }
+}
+
+impl ToBytesExt for &str {
+    fn to_bytes(&self) -> Vec<u8> {
+        self.as_bytes().to_vec()
     }
 }

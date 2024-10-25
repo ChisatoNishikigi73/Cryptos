@@ -9,6 +9,7 @@ use crate::utils::x2x::bytes_to_hex;
 /// # Returns
 ///
 /// Returns the bytes represented by the hex string
+#[allow(dead_code)]
 pub fn hex_to_bytes(hex: &str) -> Vec<u8> {
     hex.as_bytes().chunks(2).map(|chunk| u8::from_str_radix(std::str::from_utf8(chunk).unwrap(), 16).unwrap()).collect()
 }
@@ -24,6 +25,7 @@ pub trait ToHexExt {
     /// # Returns
     ///
     /// A `String` containing the hexadecimal representation of the implementing type.
+    #[allow(dead_code)]
     fn to_hex(&self, uppercase: bool) -> String;
 }
 
@@ -50,4 +52,21 @@ impl<const N: usize> ToHexExt for [u8; N] {
     fn to_hex(&self, uppercase: bool) -> String {
         bytes_to_hex(self, uppercase)
     }
+}
+
+impl ToHexExt for String {
+    fn to_hex(&self, uppercase: bool) -> String {
+        bytes_to_hex(self.as_bytes(), uppercase)
+    }
+}
+
+impl ToHexExt for Vec<u8> {
+    fn to_hex(&self, uppercase: bool) -> String {
+        bytes_to_hex(self, uppercase)
+    }
+}
+
+#[allow(dead_code)]
+pub fn from_hex<const N: usize>(hex: [u8; N]) -> String {
+    hex.iter().map(|b| format!("{:02x}", b)).collect()
 }

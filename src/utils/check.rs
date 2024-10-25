@@ -12,6 +12,7 @@ use std::time::Instant;
 /// # Returns
 ///
 /// Returns true if all tests passed; otherwise returns false
+#[allow(dead_code)]
 pub fn compare_check<I, O, F>(
     cases: Vec<(I, O)>,
     name: &str,
@@ -74,6 +75,7 @@ fn truncate_with_ellipsis(s: String, max_length: usize) -> String {
 /// # Returns
 ///
 /// Returns true if all tests passed; otherwise returns false
+#[allow(dead_code)]
 pub fn compare_check_with_params<I, O, P, F, T>(
     cases: Vec<(I, O)>,
     name: &str,
