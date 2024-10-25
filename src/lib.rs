@@ -1,2 +1,4 @@
-pub mod crypto;
-pub mod utils;
+mod crypto;
+mod utils;
+
+pub use crypto::*;

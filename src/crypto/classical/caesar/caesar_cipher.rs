@@ -16,7 +16,7 @@
 /// # Example
 /// 
 /// ```
-/// use cryptos::crypto::classical::caesar::{encrypt, decrypt};
+/// use cryptos::classical::caesar::{encrypt, decrypt};
 /// 
 /// let plaintext = "HELLO";
 /// let ciphertext = encrypt(&plaintext, 3);
@@ -45,7 +45,7 @@ pub fn encrypt(text: &str, shift: i32) -> String {
 /// # Example
 /// 
 /// ```
-/// use cryptos::crypto::classical::caesar::decrypt;
+/// use cryptos::classical::caesar::decrypt;
 /// 
 /// let ciphertext = "KHOOR";
 /// let plaintext = decrypt(ciphertext, 3);

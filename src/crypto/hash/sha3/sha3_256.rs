@@ -145,7 +145,7 @@ impl Sha3_256 {
 /// # Example
 /// 
 /// ```
-/// use cryptos::crypto::hash::sha3::sha3_256;
+/// use cryptos::hash::sha3::sha3_256;
 /// 
 /// let data = b"Hello, world!";
 /// let hash = sha3_256(data);
