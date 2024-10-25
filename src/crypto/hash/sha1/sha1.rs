@@ -4,7 +4,7 @@
 //! It is a 160-bit hash function that is based on the SHA-1 algorithm
 //! 
 #[allow(unused_imports)]
-pub use crate::utils::r#trait::base_trait::ToHexExt;
+pub use crate::utils::x2x::ToHexExt;
 
 const BLOCK_SIZE: usize = 64; // 512 bits = 64 bytes
 const HASH_SIZE: usize = 20; // 160 bits = 20 bytes

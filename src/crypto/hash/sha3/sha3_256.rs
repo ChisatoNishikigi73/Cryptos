@@ -4,7 +4,7 @@
 
 use super::sha3_util::{RC, keccak_f1600_round};
 #[allow(unused_imports)]
-use crate::utils::r#trait::base_trait::ToHexExt;
+pub use crate::utils::x2x::ToHexExt;
 
 /// Rate in bytes (1088 bits) for SHA3-256
 /// Rate represents the portion of the state that is used for absorbing input

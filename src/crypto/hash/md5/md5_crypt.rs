@@ -1,6 +1,6 @@
 use super::md5_base::md5_base;
 #[allow(unused_imports)]
-pub use crate::utils::r#trait::base_trait::ToHexExt;
+pub use crate::utils::x2x::ToHexExt;
 
 /// Performs MD5 crypt operation based on the given password, salt, and pattern.
 ///

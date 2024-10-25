@@ -5,7 +5,7 @@
 //! 
 use super::sha2_util::{K64, ch64, maj64, bsig0_64, bsig1_64, ssig0_64, ssig1_64};
 #[allow(unused_imports)]
-use crate::utils::r#trait::base_trait::ToHexExt;
+pub use crate::utils::x2x::ToHexExt;
 
 const BLOCK_SIZE: usize = 128; // 1024 bits = 128 bytes
 const HASH_SIZE: usize = 64; // 512 bits = 64 bytes

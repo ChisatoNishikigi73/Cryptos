@@ -1,6 +1,6 @@
 use std::mem::transmute;
 #[allow(unused_imports)]
-pub use crate::utils::r#trait::base_trait::ToHexExt;
+pub use crate::utils::x2x::ToHexExt;
 
 /// Constants used in the MD5 algorithm
 const S: [u32; 64] = [
