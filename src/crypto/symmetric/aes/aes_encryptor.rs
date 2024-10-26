@@ -4,9 +4,6 @@
 use super::aes::{AesCipher, AesMode};
 use crate::crypto::symmetric::aes::aes_util::{SBOX, RCON};
 
-#[allow(unused)]
-use crate::utils::x2x::{ToBase64Ext, ToHexExt};
-
 /// AES encryption implementation with support for multiple block cipher modes
 pub struct AesEncryptor {
     cipher: AesCipher,
@@ -303,6 +300,7 @@ mod tests {
     use crate::hash::md5::md5_base;
     use crate::utils::check::compare_check;
     use crate::utils::x2x::ToBase64Ext;
+    use crate::utils::x2x::ToHexExt;
 
     fn setup() -> (Vec<u8>, Vec<u8>) {
         let key = sha3_256("Now I am become Death, the destroyer of worlds".as_bytes());

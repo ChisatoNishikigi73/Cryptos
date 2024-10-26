@@ -3,8 +3,6 @@
 //! standardized by NIST in FIPS 202.
 
 use super::sha3_util::{RC, keccak_f1600_round};
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
 
 /// Rate in bytes (1088 bits) for SHA3-256
 /// Rate represents the portion of the state that is used for absorbing input
@@ -160,6 +158,7 @@ pub fn sha3_256(data: &[u8]) -> [u8; HASH_SIZE] {
 mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
     fn test_sha3_256() {

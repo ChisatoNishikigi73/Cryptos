@@ -9,6 +9,7 @@ use crate::utils::x2x::bytes_to_hex;
 /// # Returns
 ///
 /// Returns the bytes represented by the hex string
+#[allow(unused)]
 pub fn hex_to_bytes(hex: &str) -> Vec<u8> {
     let hex = hex.replace("0x", "").replace(" ", "");
     
@@ -80,6 +81,7 @@ impl ToHexExt for Vec<u8> {
     }
 }
 
+#[allow(unused)]
 pub fn from_hex(hex: &str) -> Vec<u8> {
     hex_to_bytes(hex)
 }

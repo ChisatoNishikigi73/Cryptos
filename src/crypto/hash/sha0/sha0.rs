@@ -3,9 +3,6 @@
 //! SHA-0 is a cryptographic hash function that was designed by the National Institute of Standards and Technology (NIST)
 //! It is a 160-bit hash function that is based on the SHA-1 algorithm, but with a different initial values for the state
 //! 
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
-
 const BLOCK_SIZE: usize = 64; // 512 bits = 64 bytes
 const HASH_SIZE: usize = 20; // 160 bits = 20 bytes
 
@@ -157,6 +154,7 @@ pub fn sha0(data: &[u8]) -> [u8; HASH_SIZE] {
 mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
     fn test_sha0() {

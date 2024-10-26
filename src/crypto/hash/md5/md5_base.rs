@@ -1,6 +1,4 @@
 use std::mem::transmute;
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
 
 /// Constants used in the MD5 algorithm
 const S: [u32; 64] = [
@@ -77,7 +75,7 @@ pub fn md5_base(input: &[u8], rounds: u32) -> [u8; 16] {
 /// # Returns
 ///
 /// A 16-byte array containing the MD5 hash
-pub fn process(input: &[u8]) -> [u8; 16] {
+fn process(input: &[u8]) -> [u8; 16] {
     let mut state = MD5State::new();
     let mut buffer = Vec::from(input);
 
@@ -141,12 +139,13 @@ fn process_chunk(state: &mut MD5State, chunk: &[u8]) {
 }
 
 #[cfg(test)]
-pub mod tests {
+mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
-    pub fn md5_hex_test() {
+    fn md5_hex_test() {
         let test_cases = vec![
             ("".to_string(), "d41d8cd98f00b204e9800998ecf8427e".to_string()),
             ("password".to_string(), "5f4dcc3b5aa765d61d8327deb882cf99".to_string()),

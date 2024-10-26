@@ -1,6 +1,4 @@
 use super::md5_base::md5_base;
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
 
 /// Performs MD5 crypt operation based on the given password, salt, and pattern.
 ///
@@ -86,6 +84,7 @@ fn process_part(part: &str, password: &[u8], salt: &[u8]) -> Vec<u8> {
 mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
     fn test_md5_crypt() {

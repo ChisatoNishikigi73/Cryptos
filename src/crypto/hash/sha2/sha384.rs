@@ -4,8 +4,6 @@
 //! It is a 384-bit hash function that is based on the SHA-256 algorithm, but with a different initial values for the state
 //! 
 use super::sha2_util::{K64, ch64, maj64, bsig0_64, bsig1_64, ssig0_64, ssig1_64};
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
 
 const BLOCK_SIZE: usize = 128; // 1024 bits = 128 bytes
 const HASH_SIZE: usize = 48; // 384 bits = 48 bytes
@@ -171,6 +169,7 @@ pub fn sha384(data: &[u8]) -> [u8; HASH_SIZE] {
 mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
     fn test_sha384() {

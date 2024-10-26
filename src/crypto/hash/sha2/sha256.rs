@@ -4,8 +4,6 @@
 //! It is a 256-bit hash function that is based on the SHA-256 algorithm
 //! 
 use super::sha2_util::{K32, ch32, maj32, bsig0_32, bsig1_32, ssig0_32, ssig1_32};
-#[allow(unused_imports)]
-pub use crate::utils::x2x::ToHexExt;
 
 const BLOCK_SIZE: usize = 64; // 512 bits = 64 bytes
 const HASH_SIZE: usize = 32; // 256 bits = 32 bytes
@@ -169,6 +167,7 @@ pub fn sha256(data: &[u8]) -> [u8; HASH_SIZE] {
 mod tests {
     use super::*;
     use crate::utils::check::compare_check;
+    use crate::utils::x2x::ToHexExt;
 
     #[test]
     fn test_sha256() {
