@@ -3,16 +3,17 @@
 
 pub use crate::utils::x2x::ToBytesExt;
 use crate::crypto::symmetric::aes::aes_encryptor::AesEncryptor;
+use crate::crypto::symmetric::aes::aes_decryptor::AesDecryptor;
 
 /// Supported AES block cipher modes of operation
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum AesMode {
     NONE,
-    ECB,
-    CBC,
-    CFB,
-    OFB,
-    CTR,
+    ECB,  // Electronic Code Book
+    CBC,  // Cipher Block Chaining
+    CFB,  // Cipher Feedback
+    OFB,  // Output Feedback
+    CTR,  // Counter Mode
 }
 
 /// Builder for configuring AES cipher parameters
@@ -40,18 +41,15 @@ impl AesBuilder {
         Self::default()
     }
 
+    /// Sets the encryption key (must be 16, 24, or 32 bytes for AES-128/192/256)
+    #[inline]
     pub fn set_key(mut self, key: impl ToBytesExt) -> Self {
         let key = key.to_bytes();
-        match key.len() {
-            16 | 24 | 32 => {
-                self.key = Some(key);
-                self
-            }
-            _ => {
-                self.key = None;
-                self
-            }
-        }
+        self.key = match key.len() {
+            16 | 24 | 32 => Some(key),
+            _ => None
+        };
+        self
     }
 
     pub fn set_expanded_key(mut self, expanded_key: impl ToBytesExt) -> Self {
@@ -73,13 +71,11 @@ impl AesBuilder {
         self
     }
 
+    /// Sets the initialization vector (must be 16 bytes)
+    #[inline]
     pub fn set_iv(mut self, iv: impl ToBytesExt) -> Self {
         let iv = iv.to_bytes();
-        if iv.len() != 16 {
-            self.iv = None;
-            return self;
-        }
-        self.iv = Some(iv);
+        self.iv = if iv.len() == 16 { Some(iv) } else { None };
         self
     }
 
@@ -123,11 +119,11 @@ impl AesCipher {
         encryptor.encrypt(plaintext)
     }
 
-    // pub fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, &'static str> {
-    //     let cipher = self.clone();
-    //     let encryptor = AesEncryptor::new(cipher)?;
-    //     encryptor.decrypt(ciphertext)
-    // }
+    pub fn decrypt(&self, ciphertext: &[u8]) -> Result<Vec<u8>, &'static str> {
+        let cipher = self.clone();
+        let decryptor = AesDecryptor::new(cipher)?;
+        decryptor.decrypt(ciphertext)
+    }
 
     pub fn get_key(&self) -> &Vec<u8> {
         &self.key
