@@ -34,22 +34,31 @@ impl Sudoku {
     /// # Example
     ///
     /// ```
+    /// use cryptos::sudoku::Sudoku;
     /// let board = [
-    ///     [8, 0, 0, 0, 0, 0, 0, 0, 0],
-    ///     // ... more rows
+    /// [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    /// [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    /// [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    /// [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    /// [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    /// [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    /// [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    /// [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    /// [0, 0, 0, 0, 8, 0, 0, 7, 9],
     /// ];
-    /// let sudoku = Sudoku::new(board);
-    /// sudoku.set_record_steps(false); // If you want to see the steps, set it to true | default is false
-    /// let solved = sudoku.solve();
-    /// println!("{}", sudoku.board());
-    /// 
-    /// ```
-    /// And a Simple Way to Solve Sudoku is:
-    /// ```
-    /// let sudoku = Sudoku::new(input)
+    /// let sudoku = Sudoku::new(board)
     ///     .set_record_steps(true)
     ///     .solve();
-    /// println!("{}", sudoku.get_steps()); // To see the steps
+    /// match sudoku {
+    ///     Ok(solved_sudoku) => 
+    ///     {
+    ///         if solved_sudoku.get_steps().len() > 0 {
+    ///             println!("steps: {}", solved_sudoku.get_steps().len());
+    ///         }
+    ///         solved_sudoku.print_board();
+    ///     },
+    ///     Err(_) => panic!("Failed to solve Sudoku"),
+    /// }
     /// ```
     pub fn new(board: [[u8; 9]; 9]) -> Self {
         let mut sudoku = Sudoku { 
@@ -225,11 +234,10 @@ impl Sudoku {
     /// * A reference to the 9x9 array representing the solved Sudoku board.
     /// Like this:
     /// ```
-    ///  [8, 1, 2, 7, 5, 3, 6, 4, 9],
-    ///  [9, 4, 3, 6, 8, 2, 1, 7, 5],
-    ///  [6, 7, 5, 4, 9, 1, 2, 8, 3],
-    ///  ...
-    /// 
+    /// // [8, 1, 2, 7, 5, 3, 6, 4, 9],
+    /// // [9, 4, 3, 6, 8, 2, 1, 7, 5],
+    /// // [6, 7, 5, 4, 9, 1, 2, 8, 3],
+    /// // ...
     /// ```
     pub fn get_board(&self) -> &[[u8; 9]; 9] {
         &self.board
