@@ -9,9 +9,23 @@ use crate::utils::x2x::bytes_to_hex;
 /// # Returns
 ///
 /// Returns the bytes represented by the hex string
-#[allow(dead_code)]
 pub fn hex_to_bytes(hex: &str) -> Vec<u8> {
-    hex.as_bytes().chunks(2).map(|chunk| u8::from_str_radix(std::str::from_utf8(chunk).unwrap(), 16).unwrap()).collect()
+    let hex = hex.replace("0x", "").replace(" ", "");
+    
+    if hex.len() % 2 != 0 {
+        return Vec::new();
+    }
+
+    let mut bytes = Vec::with_capacity(hex.len() / 2);
+    for chunk in hex.as_bytes().chunks(2) {
+        if let Some(byte) = std::str::from_utf8(chunk)
+            .ok()
+            .and_then(|s| u8::from_str_radix(s, 16).ok())
+        {
+            bytes.push(byte);
+        }
+    }
+    bytes
 }
 
 /// Trait
@@ -66,7 +80,6 @@ impl ToHexExt for Vec<u8> {
     }
 }
 
-#[allow(dead_code)]
-pub fn from_hex<const N: usize>(hex: [u8; N]) -> String {
-    hex.iter().map(|b| format!("{:02x}", b)).collect()
+pub fn from_hex(hex: &str) -> Vec<u8> {
+    hex_to_bytes(hex)
 }
